@@ -1,6 +1,5 @@
-import {Component, EventEmitter, Inject, Input, OnInit, Output} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {CalendarService} from "../services/calendar.service";
 import {Appointment} from "../models";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 
@@ -47,7 +46,7 @@ export class AppointmentFormComponent implements OnInit {
 
   onSubmit() {
     if (this.appointmentForm.valid) {
-      const { title, date, time, duration, description } = this.appointmentForm.value;
+      const {title, date, time, duration, description} = this.appointmentForm.value;
       const appointmentDate = new Date(date);
       appointmentDate.setHours(parseInt(time.split(':')[0], 10));
       appointmentDate.setMinutes(parseInt(time.split(':')[1], 10));
@@ -59,16 +58,17 @@ export class AppointmentFormComponent implements OnInit {
         duration,
         description
       };
-      this.dialogRef.close({ action: 'save', appointment });
+      this.dialogRef.close({action: 'save', appointment});
     }
   }
 
   onCancel() {
     this.dialogRef.close();
   }
+
   onDelete() {
     if (this.data.appointment) {
-      this.dialogRef.close({ action: 'delete', appointment: this.data.appointment });
+      this.dialogRef.close({action: 'delete', appointment: this.data.appointment});
     }
   }
 

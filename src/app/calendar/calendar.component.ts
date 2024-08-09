@@ -201,7 +201,6 @@ export class CalendarComponent implements OnInit, AfterViewChecked  {
   }
 
   drop(event: CdkDragDrop<{date: Date, time: string}>) {
-    const prevDate = event.previousContainer.data.date;
     const newDate = event.container.data.date;
     const newTime = event.container.data.time;
     const appointment: Appointment = event.item.data;
@@ -247,7 +246,6 @@ export class CalendarComponent implements OnInit, AfterViewChecked  {
     const dayIndex = Math.min(Math.max(Math.floor(adjustedX / dayWidth), 0), 6);
 
     const totalMinutes = this.MINUTES_PER_DAY;
-    const pixelsPerDay = this.PIXELS_PER_SLOT * (totalMinutes / this.MINUTES_PER_SLOT);
 
     let minutesFromMidnight = this.getMinutesFromPixels(adjustedY);
     minutesFromMidnight = Math.min(Math.max(minutesFromMidnight, 0), totalMinutes - appointment.duration);
